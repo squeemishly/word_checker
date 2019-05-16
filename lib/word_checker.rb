@@ -18,7 +18,7 @@ class WordChecker
   end
 
   def create_word_list
-    File.readlines('words.txt').inject({}) do |hash, word|
+    File.readlines('lib/words.txt').inject({}) do |hash, word|
       word_hash = word.chomp.split('').sort.join
       hash[word_hash] ||= []
       hash[word_hash] << word.chomp
