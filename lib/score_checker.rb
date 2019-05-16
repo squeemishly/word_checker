@@ -9,7 +9,7 @@ class ScoreChecker
     "y": 4, "z": 10
   }
 
-  def calculate_score(tiles)
+  def self.calculate_score(tiles)
     letters = tiles.downcase.split('')
 
     letters.inject(0) do |sum, letter|

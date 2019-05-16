@@ -43,4 +43,10 @@ class WordCheckerTest < Minitest::Test
     refute word_list.include?("ha")
     refute word_list.include?("has")
   end
+
+  def test_it_can_calculate_the_score_of_each_word
+    result = { "as"=>2, "sh"=>5, "ash"=>6 }
+
+    assert_equal result, wc.return_scores(["as", "sh", "ash"])
+  end
 end

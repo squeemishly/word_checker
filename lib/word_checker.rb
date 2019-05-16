@@ -1,5 +1,4 @@
-require 'pry'
-require 'digest'
+require './lib/score_checker'
 
 class WordChecker
   attr_reader :word_list
@@ -43,6 +42,13 @@ class WordChecker
     potentials = find_words("#{tiles}#{inclusion}")
     filtered = potentials.select do |word|
       word.match?(/^.{0,#{space_before}}#{inclusion}.{0,#{space_after}}$/)
+    end
+  end
+
+  def return_scores(words)
+    words.inject({}) do |hash, word|
+      hash[word] = ScoreChecker.calculate_score(word)
+      hash
     end
   end
 end
