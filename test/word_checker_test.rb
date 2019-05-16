@@ -20,7 +20,7 @@ class WordCheckerTest < Minitest::Test
 
   def test_it_can_create_an_anagram_of_a_group_of_letters
     result = ["ah", "as", "hs", "ahs"]
-    
+
     assert_equal result, wc.anagramify("ahs")
     assert_equal wc.anagramify("aabbccc").uniq, wc.anagramify("aabbccc")
   end
@@ -52,9 +52,24 @@ class WordCheckerTest < Minitest::Test
   end
 
   def test_it_can_return_results_with_a_wild_card
-    result = ["as", "es", "sh", "ash", "is", "si", "ask", "os", "so", "asp", "ass", "us"]
-    word_list = wc.find_words_including("a?", "s", 1, 1)
+    single_result = ["as", "es", "sh", "ash", "is", "si", "ask", "os", "so", "asp", "ass", "us"]
+    single_word_list = wc.find_words_including("a?", "s", 1, 1)
+    double_result = ["as", "es", "sh", "ash", "is", "si", "ask", "os", "so", "asp", "ass", "us", "ose", "ess", "use", "ism", "psi", "tsk"]
+    double_word_list = wc.find_words_including("a??", "s", 1, 1)
 
-    assert_equal result, word_list
+    assert_equal single_result, single_word_list
+    assert_equal double_result, double_word_list
+  end
+
+  def test_cannot_include_more_than_10_tiles
+    assert_raises RuntimeError do
+      wc.find_words_including("adhoaestnariesn", "s", 1, 1)
+    end
+  end
+
+  def test_cannot_include_more_than_1_inclusion
+    assert_raises RuntimeError do
+      wc.find_words_including("a", "sb", 1, 1)
+    end
   end
 end

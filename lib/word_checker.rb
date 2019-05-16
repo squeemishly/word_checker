@@ -39,6 +39,7 @@ class WordChecker
   end
 
   def find_words_including(tiles, inclusion, space_before, space_after)
+    validate_query(tiles, inclusion, space_before, space_after)
     if tiles.include?("?")
       potentials = build_wildcard(tiles, inclusion)
     else
@@ -56,14 +57,39 @@ class WordChecker
     end
   end
 
+  # def build_wildcard(tiles, inclusion)
+  #   wildcards = ("a".."z").to_a.map do |letter|
+  #     letter << tiles.delete("?")
+  #   end
+  #
+  #   wildcards.map do |wild|
+  #     find_words("#{wild}#{inclusion}")
+  #   end.flatten.uniq
+  # end
+
   def build_wildcard(tiles, inclusion)
-    wildcards = ("a".."z").to_a.map do |letter|
-      letter << tiles.delete("?")
+    # I hate everything about this solution
+    wildcard_count = tiles.count("?")
+
+    if wildcard_count == 1
+      wildcards = ("a".."z").to_a.map { |letter| letter << tiles.delete("?") }
+    elsif wildcard_count == 2
+      wildcards = ("a".."z").to_a.map { |letter| letter << tiles.delete("?") }
+
+      wildcards = wildcards.flat_map do |wildcard|
+        ("a".."z").to_a.map { |letter| wildcard + letter }
+      end.uniq
     end
 
-    wildcards.map do |wild|
+    wildcards.flat_map do |wild|
       find_words("#{wild}#{inclusion}")
-    end.flatten.uniq
+    end.uniq
+  end
+
+  def validate_query(tiles, inclusion, space_before, space_after)
+    if tiles.length > 10 || inclusion.length > 1
+      raise("Nope...")
+    end
   end
 end
 
