@@ -1,4 +1,5 @@
 require_relative './test_helper'
+require './lib/word_checker'
 
 class WordCheckerTest < Minitest::Test
   # attr_reader :wc
