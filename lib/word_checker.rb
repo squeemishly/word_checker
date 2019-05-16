@@ -39,8 +39,12 @@ class WordChecker
   end
 
   def find_words_including(tiles, inclusion, space_before, space_after)
-    potentials = find_words("#{tiles}#{inclusion}")
-    filtered = potentials.select do |word|
+    if tiles.include?("?")
+      potentials = build_wildcard(tiles, inclusion)
+    else
+      potentials = find_words("#{tiles}#{inclusion}")
+    end
+    potentials.select do |word|
       word.match?(/^.{0,#{space_before}}#{inclusion}.{0,#{space_after}}$/)
     end
   end
@@ -50,6 +54,16 @@ class WordChecker
       hash[word] = ScoreChecker.calculate_score(word)
       hash
     end
+  end
+
+  def build_wildcard(tiles, inclusion)
+    wildcards = ("a".."z").to_a.map do |letter|
+      letter << tiles.delete("?")
+    end
+
+    wildcards.map do |wild|
+      find_words("#{wild}#{inclusion}")
+    end.flatten.uniq
   end
 end
 
