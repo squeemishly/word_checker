@@ -2,15 +2,10 @@ require_relative './test_helper'
 require './lib/word_checker'
 
 class WordCheckerTest < Minitest::Test
-  # attr_reader :wc
-  #
-  # def setup
-  #   @wc = WordChecker.new
-  # end
-  @@wc = WordChecker.new
+  attr_reader :wc
 
-  def wc
-    @@wc
+  def setup
+    @wc = WordChecker.instance
   end
 
   def test_it_creates_a_wordlist_on_init

@@ -7,6 +7,10 @@ class WordChecker
     @word_list = create_word_list
   end
 
+  def self.instance
+    @instance ||= WordChecker.new
+  end
+
   def anagramify(word)
     # make a list of possible words out of letter combinations
     letters = word.downcase.split('')
@@ -39,7 +43,7 @@ class WordChecker
   end
 
   def find_words_including(tiles, inclusion, space_before, space_after)
-    validate_query(tiles, inclusion, space_before, space_after)
+    validate_query(tiles, inclusion)
     if tiles.include?("?")
       potentials = build_wildcard(tiles, inclusion)
     else
@@ -86,7 +90,7 @@ class WordChecker
     end.uniq
   end
 
-  def validate_query(tiles, inclusion, space_before, space_after)
+  def validate_query(tiles, inclusion)
     if tiles.length > 10 || inclusion.length > 1
       raise("Nope...")
     end
