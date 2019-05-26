@@ -9,28 +9,36 @@ class Display
 
   def show_board
     print "    "
-    for x in 1..8 do
-      print "#{x}   "
-    end
+    column_headings
+    row_boundary
+    fill_in_board
+  end
 
-    for x in 9..15 do
-      print "#{x}  "
-    end
+  private
 
-    print "\n"
-
-    print "  "
-    print "-" * 61
-    print "\n"
-    board.board.each do |row|
-      print "#{row[0].row} |"
-      row.each do |column|
-        print " #{column.value} |"
+    def column_headings
+      for x in 1..8 do
+        print "#{x}   "
       end
 
-      print "\n"
-      print " " * 2
+      for x in 9..15 do
+        print "#{x}  "
+      end
+    end
+
+    def row_boundary
+      print "\n  "
       puts "-" * 61
     end
-  end
+
+    def fill_in_board
+      board.board.each do |row|
+        print "#{row[0].row} |"
+        row.each do |column|
+          print " #{column.value} |"
+        end
+
+        row_boundary
+      end
+    end
 end
