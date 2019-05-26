@@ -12,6 +12,11 @@ class Board
     add_cells_to_grid(grid)
   end
 
+  def play(letter, row, column)
+    rows = ("A".."Z").to_a
+    board[rows.find_index(row)][column - 1].value = letter
+  end
+
   private
 
     def add_cells_to_grid(grid)
