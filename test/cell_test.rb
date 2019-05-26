@@ -8,8 +8,11 @@ class CellTest < Minitest::Test
     @cell = Cell.new("A", 1)
   end
 
-  def test_it_starts_with_a_blank_value
+  def test_init_values
     assert_equal " ", cell.value
+    assert_equal "A", cell.row
+    assert_equal 1, cell.column
+    refute cell.multiplier
   end
 
   def test_the_value_can_be_updated_to_a_letter

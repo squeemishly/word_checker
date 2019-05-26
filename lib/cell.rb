@@ -1,5 +1,7 @@
 class Cell
-  attr_accessor :value
+  attr_accessor :value,
+                :multiplier
+
   attr_reader :row,
               :column
 
@@ -7,6 +9,7 @@ class Cell
     @row = row
     @column = column
     @value = " "
+    @multiplier = nil
   end
 
   def add_value(letter)
