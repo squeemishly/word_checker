@@ -9,7 +9,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_starts_with_a_blank_value
-    assert_equal "", cell.value
+    assert_equal " ", cell.value
   end
 
   def test_the_value_can_be_updated_to_a_letter
