@@ -6,7 +6,7 @@ class Cell
   def initialize(row, column)
     @row = row
     @column = column
-    @value = ""
+    @value = " "
   end
 
   def add_value(letter)
