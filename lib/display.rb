@@ -18,10 +18,10 @@ class Display
   private
 
     CELL_COLORS = {
-      "3W": {color: :blue, background: :light_blue},
-      "3L": {color: :blue},
-      "2W": {color: :red, background: :light_red},
-      "2L": {color: :red}
+      "3W": {color: :magenta, background: :light_red},
+      "3L": {color: :blue, background: :light_cyan},
+      "2W": {color: :red, background: :light_magenta},
+      "2L": {color: :cyan, background: :light_blue}
     }
 
     def column_headings
@@ -44,9 +44,9 @@ class Display
         print "#{row[0].row} |"
         row.each do |column|
           if column.value != " "
-            print " #{column.value}  |"
+            print " #{column.value.colorize(:yellow)}  |"
           elsif column.multiplier
-            print " #{column.multiplier.colorize(CELL_COLORS[column.multiplier.to_sym])} |"
+            print " #{column.multiplier} ".colorize(CELL_COLORS[column.multiplier.to_sym]) + "|"
           else
             print "    |"
           end

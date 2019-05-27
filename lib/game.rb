@@ -16,19 +16,18 @@ class Game
 
     while true
       puts `clear`
-      display.show_board
       play
     end
   end
 
   def play
+    display.show_board
     puts "Please enter a tile letter"
     letter = gets.chomp
-    puts "Please enter the row letter"
-    row = gets.chomp.upcase
-    puts "Please enter the column number"
-    column = gets.chomp.to_i
+    puts "Please enter the cell address, row letter followed by column number, e.g.: A1"
+    address = gets.chomp
+    row = address[0].upcase
+    column = address[1..-1].to_i
     display.board.play(letter, row, column)
-    display.show_board
   end
 end
