@@ -9,7 +9,6 @@ class Display
   end
 
   def show_board
-    print "    "
     column_headings
     row_boundary
     fill_in_board
@@ -25,6 +24,7 @@ class Display
     }
 
     def column_headings
+      print "    "
       for x in 1..8 do
         print " #{x}   "
       end
