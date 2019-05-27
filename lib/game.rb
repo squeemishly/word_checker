@@ -39,13 +39,19 @@ class Game
       puts "Type 'exit' to return to the home screen".colorize(:red)
       display.show_board
 
-      puts "Please enter a tile letter"
-      letter = gets.chomp.downcase
-      run if letter == "exit"
+      letter = get_letter
+      while invalid_letter(letter)
+        puts `clear`
+        puts "Please only enter 1 letter per tile space".colorize(:red)
+        letter = get_letter
+      end
 
-      puts "Please enter the cell address, row letter followed by column number, e.g.: A1"
-      address = gets.chomp.downcase
-      run if address == "exit"
+      address = get_address
+      while invalid_address(address)
+        puts `clear`
+        puts "Please enter a valid address".colorize(:red)
+        address = get_address
+      end
 
       row = address[0].upcase
       column = address[1..-1].to_i
@@ -86,5 +92,37 @@ class Game
 
     def invalid_response(answer)
       answer != "b" && answer != "build" && answer != "c" && answer != "check"
+    end
+
+    def get_letter
+      puts "Please enter a tile letter"
+      letter = gets.chomp.downcase
+      run if letter == "exit"
+      letter
+    end
+
+    def get_address
+      puts "Please enter the cell address, row letter followed by column number, e.g.: A1"
+      address = gets.chomp.downcase
+      run if address == "exit"
+      address
+    end
+
+    def invalid_letter(letter)
+      letter.length > 1 || !("a".."z").to_a.include?(letter)
+    end
+
+    def invalid_address(address)
+      if address.length > 3
+        true
+      elsif !("a".."o").to_a.include?(address[0])
+        true
+      elsif !(1..15).to_a.include?(address[1].to_i)
+        true
+      elsif address[2] && !(1..15).to_a.include?(address[2].to_i)
+        true
+      else
+        false
+      end
     end
 end
