@@ -1,5 +1,3 @@
-gem "minitest"
-
 require "minitest/autorun"
 require "minitest/reporters"
 require "pry-byebug"
