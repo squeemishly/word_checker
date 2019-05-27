@@ -10,8 +10,6 @@ A REPL interface for figuring out the best move in your scrabble game.
 1. `cd` into the folder that was created by cloning.
 1. Run `bundle`.
 
-~FIN~
-
 ## Running it on Your Machine
 
 Run `ruby scrabble_cheater.rb` and follow instructions.
