@@ -117,9 +117,7 @@ class Game
         true
       elsif !("a".."o").to_a.include?(address[0])
         true
-      elsif !(1..15).to_a.include?(address[1].to_i)
-        true
-      elsif address[2] && !(1..15).to_a.include?(address[2].to_i)
+      elsif !(1..15).to_a.include?(address[1..-1].to_i)
         true
       else
         false
